@@ -1,3 +1,14 @@
+= Principios de d3 =
+
+<pre class="{javscript}">d3.select(&quot;body&quot;)              // select the body element
+  .append(&quot;svg&quot;)               // add new svg element
+    .attr(&quot;width&quot;, 250)        //  with some properties
+    .attr(&quot;height&quot;, 50)
+    .append(&quot;text&quot;)            // add a text element to svg element
+      .text(&quot;Easy peasy&quot;)
+      .attr(&quot;y&quot;, 25)
+      .attr(&quot;x&quot;, 0)
+      .style(&quot;fill&quot;, &quot;purple&quot;)</pre>
 = Notas =
 
 Algunas notas
