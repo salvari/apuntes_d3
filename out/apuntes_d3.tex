@@ -1,3 +1,7 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+\PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
+%
 \documentclass[12pt,spanish,]{article}
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
@@ -6,12 +10,9 @@
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
 \else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-  \else
-    \usepackage{fontspec}
-  \fi
+  \usepackage{unicode-math}
   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
     \setmainfont[]{Ubuntu}
     \setmonofont[Mapping=tex-ansi]{Ubuntu Mono}
@@ -20,12 +21,17 @@
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 % use microtype if available
 \IfFileExists{microtype.sty}{%
-\usepackage{microtype}
+\usepackage[]{microtype}
 \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\usepackage[a4paper]{geometry}
-\usepackage[unicode=true]{hyperref}
-\PassOptionsToPackage{usenames,dvipsnames}{color} % color is loaded by hyperref
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{xcolor}
+\usepackage{hyperref}
 \hypersetup{
             pdftitle={Apuntes d3.js},
             pdfauthor={Sergio Alvariño salvari@gmail.com},
@@ -35,18 +41,7 @@
             urlcolor=Blue,
             breaklinks=true}
 \urlstyle{same}  % don't use monospace font for urls
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[shorthands=off,main=spanish]{babel}
-\else
-  \usepackage{polyglossia}
-  \setmainlanguage[]{spanish}
-\fi
-\IfFileExists{parskip.sty}{%
-\usepackage{parskip}
-}{% else
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{6pt plus 2pt minus 1pt}
-}
+\usepackage[a4paper]{geometry}
 \setlength{\emergencystretch}{3em}  % prevent overfull lines
 \providecommand{\tightlist}{%
   \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
@@ -59,6 +54,19 @@
 \ifx\subparagraph\undefined\else
 \let\oldsubparagraph\subparagraph
 \renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[shorthands=off,main=spanish]{babel}
+\else
+  % load polyglossia as late as possible as it *could* call bidi if RTL lang (e.g. Hebrew or Arabic)
+  \usepackage{polyglossia}
+  \setmainlanguage[]{spanish}
 \fi
 
 \title{Apuntes d3.js}
@@ -75,11 +83,12 @@ Solo para referencia rápida y personal.
 \end{abstract}
 
 {
-\hypersetup{linkcolor=black}
+\hypersetup{linkcolor=}
 \setcounter{tocdepth}{3}
 \tableofcontents
 }
-\section{Principios de d3}\label{principios-de-d3}
+\hypertarget{principios-de-d3}{%
+\section{Principios de d3}\label{principios-de-d3}}
 
 \begin{verbatim}
 d3.select("body")              // select the body element
@@ -93,7 +102,8 @@ d3.select("body")              // select the body element
       .style("fill", "purple")
 \end{verbatim}
 
-\section{Notas}\label{notas}
+\hypertarget{notas}{%
+\section{Notas}\label{notas}}
 
 Algunas notas
 
